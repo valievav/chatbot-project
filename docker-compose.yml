@@ -1,0 +1,13 @@
+services:
+  frontend:
+    build:
+      context: .
+    ports:
+      - 5173:5173
+    develop:
+      watch:
+        - action: sync
+          path: ./frontend  # local machine
+          target: ./frontend  # inside container
+          ignore:
+            - node_modules
