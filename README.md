@@ -1,8 +1,8 @@
 #### Django BE + REACT FE + Docker to run env 
 
-- FE http://localhost:5173/
-- BE Admin http://localhost:8000/admin/
-- BE API http://localhost:8000/api/hello-world/
+- FE Vite + React http://localhost:5173/
+- BE Django Admin http://localhost:8000/admin/
+- BE Django REST API http://localhost:8000/api/hello-world/
 - To run project `docker compose up --watch --build`
 
 Notes on the project:
@@ -11,5 +11,7 @@ Notes on the project:
 3. Add gitignore using common gitignore examples https://github.com/github/gitignore/tree/main
 4. To setup Django project run `docker compose run --rm backend sh -c "django-admin startproject backend ."`
 5. To create core app for db, run `docker compose run --rm backend sh -c "python manage.py startapp core"`
-6. 
-
+6. To create migrations for new models, run `docker compose run --rm backend sh -c "python manage.py makemigrations"`
+7. To create superuser for db, run `docker compose run --rm backend sh -c "python manage.py createsuperuser"`
+   (root, admin@admin.com, admin)
+8
