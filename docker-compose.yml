@@ -26,11 +26,12 @@ services:
     command: >
       sh -c "python manage.py migrate && 
              python manage.py runserver 0.0.0.0:8000"
-    environment:
+    environment:  # creds exposed just for local development
       - DB_HOST=db
       - DB_NAME=db
       - DB_USER=user
       - DB_PASSWORD=localpass
+      - CELERY_BROKER_URL=amqp://mq_user:mq_localpass@mq:5672//
     depends_on:
       db:
         condition: service_healthy
@@ -41,8 +42,8 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
     ports:
-      - 5432:5432
-    environment:
+      - 5433:5432  # remapped to 5433 to avoid conflict with local posgresql
+    environment:  # creds exposed just for local development
       - POSTGRES_DB=db
       - POSTGRES_USER=user
       - POSTGRES_PASSWORD=localpass
@@ -51,6 +52,31 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+
+  # task broker
+  mq:
+    image: rabbitmq:3.13.7-alpine
+    environment:  # creds exposed just for local development
+      - RABBITMQ_DEFAULT_USER=mq_user
+      - RABBITMQ_DEFAULT_PASS=mq_localpass
+
+  # background task runner
+  celery_worker:
+    build:
+      context: .
+    volumes:
+      - ./backend:/backend
+    command: >
+      sh -c "celery -A backend worker --loglevel=info"
+    environment: # creds exposed just for local development
+      - DB_HOST=db
+      - DB_NAME=db
+      - DB_USER=user
+      - DB_PASSWORD=localpass
+      - CELERY_BROKER_URL=amqp://mq_user:mq_localpass@mq:5672//
+    depends_on:
+      - backend
+      - mq
 
 # persisted volumes
 volumes:

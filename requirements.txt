@@ -1,4 +1,5 @@
 Django==5.1.3
 djangorestframework==3.15.2
 django-cors-headers==4.6.0
-psycopg[c]==3.2.3  # use compiled version for prod
+psycopg[c]==3.2.3  # use compiled version for prod (else use psycopg[binary]
+celery==5.4.0

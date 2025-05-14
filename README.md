@@ -14,4 +14,8 @@ Notes on the project:
 6. To create migrations for new models, run `docker compose run --rm backend sh -c "python manage.py makemigrations"`
 7. To create superuser for db, run `docker compose run --rm backend sh -c "python manage.py createsuperuser"`
    (root, admin@admin.com, admin)
-8
+8. To run queries in PGAdmin -> add server (host 127.0.0.1, port 5433, username user, password localpass)
+9. To test task run, open interactive shell `docker compose run --rm backend sh -c "python manage.py shell"`
+and run `from core import tasks; tasks.hello_task('Alice')` to run task directly as a function synchronously w/o celery 
+OR `tasks.hello_task.delay('Lily')` / `tasks.hello_task.apply_async(args=["Lily2"], countdown=10)` to run asynchronously with celery.
+10.  
