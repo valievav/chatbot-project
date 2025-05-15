@@ -12,10 +12,11 @@ Notes on the project:
 4. To setup Django project run `docker compose run --rm backend sh -c "django-admin startproject backend ."`
 5. To create core app for db, run `docker compose run --rm backend sh -c "python manage.py startapp core"`
 6. To create migrations for new models, run `docker compose run --rm backend sh -c "python manage.py makemigrations"`
-7. To create superuser for db, run `docker compose run --rm backend sh -c "python manage.py createsuperuser"`
+7. To run migration, run server (docker compose file has it set up to run automatically via command `python manage.py migrate`)
+8. To create superuser for db, run `docker compose run --rm backend sh -c "python manage.py createsuperuser"`
    (root, admin@admin.com, admin)
-8. To run queries in PGAdmin -> add server (host 127.0.0.1, port 5433, username user, password localpass)
-9. To test task run, open interactive shell `docker compose run --rm backend sh -c "python manage.py shell"`
+9. To run queries in PGAdmin -> add server (host 127.0.0.1, port 5433, username user, password localpass)
+10. To test task run, open interactive shell `docker compose run --rm backend sh -c "python manage.py shell"`
 and run `from core import tasks; tasks.hello_task('Alice')` to run task directly as a function synchronously w/o celery 
-OR `tasks.hello_task.delay('Lily')` / `tasks.hello_task.apply_async(args=["Lily2"], countdown=10)` to run asynchronously with celery.
-10.  
+OR `tasks.hello_task.delay('Lily')` / `tasks.hello_task.apply_async(args=["Lily2"], countdown=10)` to run asynchronously with celery. 
+11. Get API key for Gemini AI https://aistudio.google.com/apikey

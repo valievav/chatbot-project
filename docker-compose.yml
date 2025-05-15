@@ -32,6 +32,7 @@ services:
       - DB_USER=user
       - DB_PASSWORD=localpass
       - CELERY_BROKER_URL=amqp://mq_user:mq_localpass@mq:5672//
+      - GEMINI_API_KEY=${GEMINI_API_KEY}  # from .env file
     depends_on:
       db:
         condition: service_healthy
@@ -74,6 +75,7 @@ services:
       - DB_USER=user
       - DB_PASSWORD=localpass
       - CELERY_BROKER_URL=amqp://mq_user:mq_localpass@mq:5672//
+      - GEMINI_API_KEY=${GEMINI_API_KEY}  # from .env file
     depends_on:
       - backend
       - mq
