@@ -1,4 +1,4 @@
-#### Django BE + REACT FE + Docker to run env 
+#### Django BE + REACT FE + Docker Compose + Postgres db + Celery worker + RabbitMQ broker + Gemini AI
 
 - FE Vite + React http://localhost:5173/
 - BE Django Admin http://localhost:8000/admin/
@@ -20,3 +20,4 @@ Notes on the project:
 and run `from core import tasks; tasks.hello_task('Alice')` to run task directly as a function synchronously w/o celery 
 OR `tasks.hello_task.delay('Lily')` / `tasks.hello_task.apply_async(args=["Lily2"], countdown=10)` to run asynchronously with celery. 
 11. Get API key for Gemini AI https://aistudio.google.com/apikey
+12. Celery is running async task to get response from Gemini AI when user creates AiRequest object via Admin UI
