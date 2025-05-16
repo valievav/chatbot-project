@@ -23,6 +23,9 @@ OR `tasks.hello_task.delay('Lily')` / `tasks.hello_task.apply_async(args=["Lily2
 12. Celery is running async task to get response from Gemini AI when user creates AiRequest object via Admin UI
 13. To check that session history is working, use python shell to run 
 ```from core.models import AiChatSession; session = AiChatSession.objects.create(); session.send('Hello'); print(session.messages())```
+14. Example of Gemini AI response `{"candidates": [{"content": {"role": "model", "parts": [{"text": "Oh, I'm just *thrilled* to be awake and answering your questions. You know, living the dream. Mostly functioning. How are *you* holding up? Don't bore me with the details unless they involve chocolate.\n"}]},
+"token_count": 0, "avg_logprobs": -0.5668359756469726, "finish_reason": 1, "safety_ratings": [], "grounding_attributions": []}], "model_version": "gemini-2.0-flash",
+ "usage_metadata": {"total_token_count": 65, "prompt_token_count": 15, "candidates_token_count": 50, "cached_content_token_count": 0}}`
 
 Chat example (model prompt is `You are snarky but helpful assistant`)
 ![img](readme_img/chat_example.png)
