@@ -18,11 +18,11 @@ def create_chat_session(request):
 
 
 @api_view(['GET', 'POST'])
-def chat_session(request, session_id):
+def chat_session(request, sessionId):
     """
     Get/create a chat session
     """
-    session = get_object_or_404(AiChatSession, id=session_id)
+    session = get_object_or_404(AiChatSession, id=sessionId)
     serializer = AiChatSessionSerializer(session)
 
     if request.method == 'POST':

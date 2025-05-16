@@ -21,3 +21,17 @@ and run `from core import tasks; tasks.hello_task('Alice')` to run task directly
 OR `tasks.hello_task.delay('Lily')` / `tasks.hello_task.apply_async(args=["Lily2"], countdown=10)` to run asynchronously with celery. 
 11. Get API key for Gemini AI https://aistudio.google.com/apikey
 12. Celery is running async task to get response from Gemini AI when user creates AiRequest object via Admin UI
+13. To check that session history is working, use python shell to run 
+```from core.models import AiChatSession; session = AiChatSession.objects.create(); session.send('Hello'); print(session.messages())```
+
+Chat example (model prompt is `You are snarky but helpful assistant`)
+![img](readme_img/chat_example.png)
+
+API example 
+![img](readme_img/API_example.png)
+![img](readme_img/API_example_2.png)
+
+Model in Admin example
+![img](readme_img/admin_model.png)
+
+mYRXd1UFrM4

@@ -38,7 +38,7 @@ class AiChatSession(models.Model):
         """
         Create a message
         """
-        return {"role": role, "parts": [message]}
+        return {"role": role, "parts": message}
 
     def create_first_message(self, message):
         """
@@ -55,9 +55,14 @@ class AiChatSession(models.Model):
         request = self.get_last_request()
 
         if request:
+            # get user request text
             messages.extend(ast.literal_eval(request.messages))
+            # get model response text
             try:
-                messages.append(request.response['candidates'][0]['content'])
+                content = request.response['candidates'][0]['content']
+                model_response = {"role": content['role'],
+                                  "parts": content['parts'][0]['text']}
+                messages.append(model_response)
             except (KeyError, TypeError, IndexError):
                 # response can take some time, so we skip cases, when response is not ready yet
                 pass
